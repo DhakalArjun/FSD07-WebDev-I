@@ -16,9 +16,9 @@ $userRecord = mysqli_fetch_assoc($result);
 if ($userRecord){
     echo $username . " is not available";
 }
-//   else
-//   {
-//     echo $username . " is available";       
-// }
+  else
+  {
+    //echo $username . " is available";       --else do nothing
+}
 // here this php closing tag  is optional as there is not html or other any element after this. But be careful that if you close, there should be any extra white space aftr closing tag
 ?>
