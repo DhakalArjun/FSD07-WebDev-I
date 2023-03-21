@@ -1,0 +1,254 @@
+/************************************************ 
+* Developed by: Arjun Dhakal
+* Start Date: 2023-03-14
+*************************************************/
+/* ================================== Variables  */
+:root {
+  /* ------------------------------- font colors */
+  --colHeavyFont: #222831;
+  --colMediumFont: #828991;
+  --colLightFont: white;
+  --colHoverFont: rgb(124, 90, 4);
+  /* -------------------------- background colors */
+  --colBodyBG: #e3fdfd;
+  --colFormBG: white;
+  --colButtonBG: #0d6efd;
+  --colSuccessMsgBG: #a8e6cf;
+  --colErrorMsg: #ffcef3;
+  /* ------------------------------- font familys */
+  --font1: "Montserrat", sans-serif;
+  --font2: "Roboto", sans-serif;
+}
+/* ==== General/global attributes and typography*/
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--colBodyBG);
+  font-family: var(--font1);
+  line-height: 1.5;
+  color: var(--colHeavyFont);
+}
+h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+h4 {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+/* ============================================= */
+.containterCentered {
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1000px;
+}
+.txtLeft {
+  text-align: left;
+}
+.txtRight {
+  text-align: right;
+}
+.txtCenter {
+  text-align: center;
+}
+.rowFlex {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem auto;
+}
+.formLabel {
+  line-height: 2.5;
+  width: 6rem;
+  margin: 0.2rem;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+  line-height: 2.5;
+  border-radius: 3px;
+  outline: none;
+  padding: 0.2rem;
+  margin: 0.2rem;
+  border: 1px solid #dddddd;
+  font-family: var(--font1);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.btnDefault {
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  min-width: 8rem;
+  height: 2.5rem;
+  color: var(--colButtonBG);
+  background-color: var(--colLightFont);
+  border: solid 1px var(--colButtonBG);
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btnDefault:hover {
+  background: var(--colButtonBG);
+  color: var(--colLightFont);
+}
+.formAsContainter {
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: var(--colFormBG);
+  border: solid 1px var(--colFormBG);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.errorMsg {
+  margin: 1rem auto;
+  padding: 1rem;
+  background-color: var(--colErrorMsg);
+  border: solid 1px var(--colErrorMsg);
+  border-radius: 5px;
+}
+.successMsg {
+  width: 600px;
+  height: 135px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  background-color: var(--colSuccessMsgBG);
+  border: solid 1px var(--colSuccessMsgBG);
+  border-radius: 5px;
+}
+.errorMsg h4,
+successMsg h4 {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+
+/* ~~~~~~~~~~~~~ articleadd.php ~~~~~~~~~~~~~ */
+.width600 {
+  width: 600px;
+}
+#IdTitle,
+#IdContent {
+  width: 600px;
+}
+#IdContent {
+  height: 400px;
+}
+.moveRight-3 {
+  position: relative;
+  left: 3rem;
+}
+.errorAddArticle {
+  width: 600px;
+}
+/* ~~~~~~~~~~~~~ article.php ~~~~~~~~~~~~~ */
+.articleSection {
+  width: 832px;
+  margin: 0 auto;
+}
+.articleContent {
+  border: solid 2px var(--colHeavyFont);
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+  text-align: justify;
+}
+.width800 {
+  width: 800px;
+}
+.colFlex {
+  display: flex;
+  flex-direction: column;
+}
+#IdCommentContent {
+  width: 600px;
+}
+/* ~~~~~~~~~~~~~ index.php ~~~~~~~~~~~~~ */
+
+.indexArticleWrapper {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  text-align: justify;
+  background-color: var(--colFormBG);
+  border-radius: 5px;
+}
+.indexArticleHeading {
+  padding: 0;
+  margin: 0;
+}
+.indexArticleDetail {
+  padding: 0.25rem 0;
+  margin: 0;
+  color: var(--colMediumFont);
+}
+.indexArticleContent {
+  padding: 0.5rem 0;
+  margin: 0;
+  height: 2rem;
+  font-size: 0.9rem;
+  overflow: hidden;
+}
+/* ~~~~~~~~~~~~~ login.php ~~~~~~~~~~~~~ */
+
+.width350 {
+  width: 350px;
+}
+
+.width350 input[type="text"],
+.width350 input[type="password"] {
+  width: 235px;
+}
+/* ~~~~~~~~~~~~~ register.php ~~~~~~~~~~~~~ */
+.width400 {
+  width: 400px;
+}
+
+.width400 .formLabel {
+  width: 9rem;
+}
+.width400 input[type="text"],
+.width400 span,
+.width400 input[type="password"] {
+  width: 235px;
+}
+
+.moveRight2 {
+  position: relative;
+  left: 1.2rem;
+}
+.registraionNote {
+  margin: 0.5rem auto;
+  padding: 0 1rem;
+  border: solid 0.5px var(--colMediumFont);
+  border-radius: 5px;
+  font-size: small;
+  color: var(--colMediumFont);
+}
+
+.registraionNote h4 {
+  margin: 0;
+  padding: 0;
+}
+#usernameTaken {
+  font-size: small;
+  color: red;
+}
+
+.errorRegistration {
+  width: 400px;
+  font-size: 0.8rem;
+}

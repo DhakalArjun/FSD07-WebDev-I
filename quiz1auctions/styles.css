@@ -1,0 +1,278 @@
+/************************************************ 
+* Developed by: Arjun Dhakal
+* StartDate: 2023-03-20
+* Purpose: A personal mini CSS library intended to use for FSD07-WEB DEV 1 course
+*************************************************/
+/* ================================== Variables  */
+:root {
+  /* ------------------------------- font colors */
+  --colHeavyFont: #222831;
+  --colMediumFont: #828991;
+  --colLightFont: white;
+  --colHoverFont: rgb(124, 90, 4);
+  /* -------------------------- background colors */
+  --colBodyBG: #e3fdfd;
+  --colFormBG: white;
+  --colButtonBG: #0d6efd;
+  --colSuccessMsgBG: #a8e6cf;
+  --colErrorMsg: #ffcef3;
+  /* ------------------------------- font familys */
+  --font1: "Montserrat", sans-serif;
+  --font2: "Roboto", sans-serif;
+}
+/* ==== General/global attributes and typography*/
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--colBodyBG);
+  font-family: var(--font1);
+  line-height: 1.5;
+  color: var(--colHeavyFont);
+}
+h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+h4 {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+/* ============================================= */
+.containterCentered {
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1000px;
+}
+
+.formAsContainter {
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: var(--colFormBG);
+  border: solid 1px var(--colFormBG);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.formLabel {
+  line-height: 2.5;
+  width: 6rem;
+  margin: 0.2rem;
+  text-align: left;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+textarea {
+  line-height: 2.5;
+  border-radius: 3px;
+  outline: none;
+  padding: 0.2rem;
+  margin: 0.2rem;
+  border: 1px solid #dddddd;
+  font-family: var(--font1);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.btnDefault {
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  min-width: 8rem;
+  height: 2.5rem;
+  color: var(--colButtonBG);
+  background-color: var(--colLightFont);
+  border: solid 1px var(--colButtonBG);
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btnDefault:hover {
+  background: var(--colButtonBG);
+  color: var(--colLightFont);
+}
+
+.errorMsgDiv {
+  margin: 1rem auto;
+  padding: 1rem;
+  background-color: var(--colErrorMsg);
+  border: solid 1px var(--colErrorMsg);
+  border-radius: 5px;
+}
+.successMsgDiv {
+  width: 600px;
+  height: 135px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  background-color: var(--colSuccessMsgBG);
+  border: solid 1px var(--colSuccessMsgBG);
+  border-radius: 5px;
+}
+.errorMsgDiv h4,
+.successMsgDiv h4 {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
+}
+/* ~~~~~~~~~~~~~ text alignment ~~~~~~~~~~~~~ */
+.txtLeft {
+  text-align: left;
+}
+.txtRight {
+  text-align: right;
+}
+.txtCenter {
+  text-align: center;
+}
+.rowFlex {
+  display: flex;
+}
+
+.colFlex {
+  display: flex;
+  flex-direction: column;
+}
+.spaceBetween {
+  justify-content: space-between;
+  margin: 0.5rem auto;
+}
+/* ~~~~~~~~~~~~~ width and height ~~~~~~~~~~~~~ */
+.width300 {
+  width: 300px;
+}
+.width350 {
+  width: 350px;
+}
+.width400 {
+  width: 400px;
+}
+.width450 {
+  width: 450px;
+}
+.width500 {
+  width: 500px;
+}
+.width550 {
+  width: 550px;
+}
+.width600 {
+  width: 600px;
+}
+.width650 {
+  width: 650px;
+}
+.width700 {
+  width: 700px;
+}
+.width800 {
+  width: 800px;
+}
+
+.width5rem {
+  width: 5rem;
+}
+.width6rem {
+  width: 6rem;
+}
+.width7rem {
+  width: 7rem;
+}
+.width8rem {
+  width: 8rem;
+}
+.width9rem {
+  width: 9rem;
+}
+.width10rem {
+  width: 10rem;
+}
+.width12rem {
+  width: 10rem;
+}
+.width14rem {
+  width: 10rem;
+}
+.height100 {
+  height: 100px;
+}
+.height200 {
+  height: 200px;
+}
+.height400 {
+  height: 400px;
+}
+/* ~~~~~~~~~~~~~ move  ~~~~~~~~~~~~~ */
+.moveRight10 {
+  position: relative;
+  left: 10px;
+}
+.moveRight20 {
+  position: relative;
+  left: 20px;
+}
+.moveRight30 {
+  position: relative;
+  left: 30px;
+}
+.moveRight40 {
+  position: relative;
+  left: 40px;
+}
+.moveRight50 {
+  position: relative;
+  left: 50px;
+}
+/* ~~~~~~~~~~~~~ auctions.php ~~~~~~~~~~~~~ */
+.inputUploadImg {
+  line-height: 2.5;
+}
+
+.newAuctionNote {
+  margin: 0.5rem auto;
+  padding: 0 1rem;
+  border: solid 0.5px var(--colMediumFont);
+  border-radius: 5px;
+  font-size: small;
+  color: var(--colMediumFont);
+}
+
+.newAuctionNote h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.btnSmall {
+  margin: 0.1rem auto;
+  padding: 0.1rem;
+
+  color: var(--colButtonBG);
+  background-color: var(--colLightFont);
+  border: solid 1px var(--colButtonBG);
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btnSmall:hover {
+  background: var(--colButtonBG);
+  color: var(--colLightFont);
+}
+
+.containterCenteredlarge {
+  margin: 0 auto;
+  padding: 0 1rem;
+  max-width: 1400px;
+}

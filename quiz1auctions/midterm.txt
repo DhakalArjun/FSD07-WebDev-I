@@ -1,0 +1,131 @@
+QUIZ 1 - PURE PHP (no libraries)
+=================
+
+
+The main items covered in class: 3-state forms, session, CSS, jQuery and AJAX, file upload, databases.
+
+
+Create directory (project) quiz1auctions.
+
+
+Create a new database quiz1auctions.
+In MySQL database create the following table:
+
+
+auctions
+- id INT PK AI
+- itemDescription VC(1000) - 2-1000 characters
+- itemImagePath VC(200) UNIQ (NOT NULL - required)
+- sellerName VC(100)
+- sellerEmail VC(320)
+- lastBidPrice DECIMAL(10,2)  - 10 digits, 2 decimal places - money
+- lastBidderName VC(100) NULL
+- lastBidderEmail VC(320) NULL
+
+
+In your project create the following files:
+- db.php (to connect to database)
+- newauction.php
+- listitems.php
+- isbidtoolow.php - used for AJAX - takes two parameters: auction id and new bid
+- placebid.php (which requires a parameter: id of the item to bid on)
+- index.php - only a-href links to newauction.php and listitems.php
+- styles.css - basic CSS: center content, provide basic coloured backgrounds for forms and tables. Do not overdo. 5-8 styles should be sufficient. Make it look decent.
+
+
+Also create uploads/ directory for the files being uploaded.
+
+You are expected to follow the best practices you learned about in class.
+
+
+newauction.php
+--------------
+
+
+3-state form to create 'auctions' record with
+- item description 2-1000 characters as textarea, rich text (use tinymce or similar editor) with only certain HTML tags allowed: p, ul, ol, li, br, hr, em, i, strong, bold, span
+- image path for the auctioned item - file upload (required) - you must make sure it is an image (jpeg, gif, png or bmp)
+- sellers name - 2-100 characters, only letters (upper/lower-case), space, dash, dot, comma and numbers allowed
+- sellers email - something that looks like a valid email
+- initial bid price - 0 or higher - the initial 'lastBidPrice' value
+
+
+Name of image file uploaded will be generated based on the original name of the file by sanitizing that name. Sanitization will mean that any character which is not uppercase/lowecase letter, digit, underscore, minus will be replaced with underscore '_'. Then your code appends the appropriate extension to that name to create filename under which to save the file.
+If a file already exists you can append a random 10 charater suffix made of a-z and 0-9 characters to make sure the filename is unique.
+
+
+listitems.php
+-------------
+
+
+Displays HTML table with columns:
+- item description
+- image (150px wide) <img src="..." width="150">
+- sellers name
+- last bid price
+- make a bid (additional column with just an a-href with text "make a bid")
+
+
+The last row is clickable via a-ref leading to placebid.php?id=11 (or whatever auction ID it is)
+
+
+...<td><a href="placebid.php?id=11">make a bid</a></td>...
+
+
+placebid.php
+------------
+
+
+Takes one required parameter - numerical 'id' of auction item to bid on.
+If no id is provided it displays an error and stops.
+
+Displays current: 
+- item description
+- image (150px wide) <img src="..." width="150">
+- sellers name
+- last bid price
+
+
+Uses 3-state form to put a new bid on the item by entering the following values:
+- bidders name
+- bidders email
+- new bid price
+
+
+When "Place bid" (submit) button is pressed bidder's name and email are automatically saved in $_SESSION[] and put as values of bidders name/email in the form. This way the bidder only needs to enter them once.
+
+
+Also: when bid value is being entered, as the input text is being typed in on every keyup/change/paste even AJAX call using load() is issued to check if the bid is high enough.
+If it is not then "bid too low" message will show next to the input.
+
+
+On submission values are verified:
+- bidder name - 2-100 characters, only letters (upper/lower-case), space, dash, dot, comma and numbers allowed
+- bidders email - something that looks like a valid email
+- new bid price - must be higher that the current 'lastBidPrice' value, if it is not the bid fails
+
+
+isbidtoolow.php
+---------------
+
+
+This script is used in AJAX call using jQuery's load() method.
+
+
+It takes two parameters:
+id - id of the auction item
+bid - value of the new bid
+
+
+It then verifies whether the new bid is higher than the last bid placed on that item.
+
+
+If it is higher - it returns empty string "";
+If it is NOT higher - it returns text "bid too low".
+
+
+WHAT TO SUBMIT (DIFFERENT, MUST READ CAREFULLY!!!):
+1. Take screenshots illustrating what the above 3 PHP scripts would display in a web browser and save them to the main directory of this project. Try to demonstrate the extent to which your solution works (3-6 screenshots should be sufficient). E.g. before and *after* form submission, or form displaying error messages.
+2. Export SQL database from PHPMyAdmin and save the file in the directory of your project.
+3. Create a ZIP file (no RAR, no 7Zip please - only ZIP) of the *entire* project directory.
+4. Upload that ZIP file to LEA as your solution.
