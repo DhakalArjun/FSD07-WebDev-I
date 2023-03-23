@@ -299,7 +299,7 @@ textarea:focus {
   left: 50px;
 }
 /* ~~~~~~~~~~~~~ auctions.php ~~~~~~~~~~~~~ */
-.inputUploadImg {
+.lineHeight25 {
   line-height: 2.5;
 }
 
@@ -366,6 +366,14 @@ textarea:focus {
   transition: transform 0.4s;
 }
 
-.itemImage:hover {
+.itemImage:active {
   width: 500px;
+}
+#isBidlow {
+  height: 1.5rem;
+
+  margin: 0 auto;
+
+  font-size: small;
+  color: red;
 }

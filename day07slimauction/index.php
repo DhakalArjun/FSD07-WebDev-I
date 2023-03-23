@@ -120,7 +120,6 @@ $app->post('/newauction', function ($request, $response, $args) {
                 //echo $uniqueSuffix;
                 $targetFileName = $fileNameReplaced.$uniqueSuffix.".".$fileFormat;  
                 //echo $targetFileName;
-
             }else{
               $targetFileName = $fileNameReplaced.".".$fileFormat;
             }
@@ -140,22 +139,46 @@ $app->post('/newauction', function ($request, $response, $args) {
 //------------------------------ listitems.html.twig ---------------------------------
 $app->get('/listitems', function ($request, $response, $args) {
     $results = DB::query("SELECT * FROM auctions ORDER BY id DESC");
-    //print_r($results);
-   
-    // $itemList=[];    
-    // foreach ($results as $row) {
-    //     $itemList[]=$row;        
-    //   }    
-   // return $this->get('view')->render($response, 'addperson.html.twig', ['errorList' => $errorList, 'v' => $itemList[]]);
-//    return $this->get('view')->render($response, 'listitems.html.twig', ['v' => $itemList]); 
+    //print_r($results);   
     return $this->get('view')->render($response, 'listitems.html.twig', ['v' => $results]);    
 });
+//------------------------------ place bid ----------------------------------------------
+//------------- ajax toolow
+//Question: how can we get url parameter using parameter name??
+//$app->get('/isbidtoolow?itemid={id}&newbid={newbidprice}', function (Request $request, Response $response, $args) {
+     // $params  = $request->getQueryParams();
+    // print_r($params);
 
-//------------------------------ place bid ---------------------------------
+$app->get('/isbidtoolow/{id}/{newbidprice}', function (Request $request, Response $response, $args) {
+    $id = $args['id'];
+    $newBidPrice = $args['newbidprice'];
+    $auctionDetail = DB::queryFirstRow("SELECT * FROM auctions WHERE id=%d", $id);
+    $lastBid =  $auctionDetail['lastBidPrice'];
+
+    if(!$auctionDetail){   
+        $response->getBody()->write("Error: auction not found for this id");
+        return $response;
+        
+    }elseif($lastBid>= $newBidPrice){
+            //print_r($auctionDetail);
+            $response->getBody()->write("bid too low");
+            return $response;
+    }else{
+        //return blank
+        $response->getBody()->write("");
+        return $response;
+    }    
+});
+// --------------end of ajax isbidtoolow ---------------------------------------
 $app->get('/placebid', function ($request, $response, $args) {    
-    $id = $_GET['id'];    
-    $result = DB::queryFirstRow("SELECT * FROM auctions WHERE id=$id");    
-    //print_r($result);   
+    $id = $_GET['id'];   
+    $result = DB::queryFirstRow("SELECT * FROM auctions WHERE id=$id"); 
+    // if(isset($_SESSION)){
+    //     $result['bidderName']=$_SESSION['bidderDetails']['name'];
+    //     $result['bidderEmail']=$_SESSION['bidderDetails']['email'];        
+    // }    
+    // print_r($_SESSION);
+    // print_r($result); 
    return $this->get('view')->render($response, 'placebid.html.twig', ['v' => $result]);     
 });
 
@@ -191,14 +214,17 @@ $app->post('/placebid', function ($request, $response, $args) {
         $imagePath = $result['itemImagePath'];
         $desc = $result['itemDescription'];
 
-        $valuesList = ['bidder'=>$bidderName, 'email'=>$bidderEmail, 'newBid'=>$newBidPrice, 'sellerName'=>$seller, 
+        $valuesList = ['bidderName'=>$bidderName, 'bidderEmail'=>$bidderEmail, 'newBid'=>$newBidPrice, 'sellerName'=>$seller, 
         'lastBidPrice'=>$lastBid, 'itemImagePath'=>$imagePath, 'itemDescription'=>$desc];
         //key text should match the text value inputs in place.html.twing                 
         return $this->get('view')->render($response, 'placebid.html.twig', ['errorList' => $errors, 'v' => $valuesList]);
 
     }else{
-        DB::update('auctions',['lastBidPrice'=>$newBidPrice, 'lastBidderName'=>$bidderName, 'lastBidderEmail'=>$bidderEmail], 'id=%d', $id);        
-        return $this->get('view')->render($response, 'newauction_success.html.twig'); 
+        DB::update('auctions',['lastBidPrice'=>$newBidPrice, 'lastBidderName'=>$bidderName, 'lastBidderEmail'=>$bidderEmail], 'id=%d', $id);
+        //save the bidderDetails in session 
+        // $bidderDetails = ['name'=> $bidderName, 'email'=>$bidderEmail];
+        // $_SESSION['bidderDetails'] = $bidderDetails;        
+        return $this->get('view')->render($response, 'newauction_success.html.twig');        
     }
     });
 $app->run();

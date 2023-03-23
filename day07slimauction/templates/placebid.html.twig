@@ -1,37 +1,59 @@
 {% extends "master.html.twig" %}
+{% block addHead %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+      //get url parameter id using javaScript
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      // jQuery ------
+      $(document).ready(function() {
+          $('input[name=newBidPrice]').keyup(function() {                
+              var newBidPrice = $(this).val(); 
+              //const id =$.urlParam('id');   // ===>> Error: urlParam is not defined function
+              //const id  =$.url.attr('id');  // ===>> Error: attr is not defined function
+              //console.log('id: ' + id + 'isBidLow: ' + newBidPrice);
+              //$('#isBidlow').load("isbidtoolow/" + id + "/" + newBidPrice) 
+              if($.isNumeric(newBidPrice) && newBidPrice>0 && $.isNumeric(id)){ 
+                $('#isBidlow').load("isbidtoolow/" + id + "/" + newBidPrice)
+              }              
+          });
+      });
+  </script>
+{% endblock addHead %}
 {% block content %}
-
-<div class="width800 itemConainer">
-    <div class="detailImageWrapper rowFlex spaceBetween">
-      <div class="detailWrapper">
-        <div class="rowFlex">
-          <p class="width100 pX10 semiBold">Seller Name:</p><p class="pX10">{{v.sellerName}}</p>
-        </div>
-        <div class="rowFlex">
-        <p class="width100 pX10 semiBold">Last Bid:</p><p class="pX10">{{v.lastBidPrice}}</p>       
-        </div> 
-      </div>     
-      <img src="{{v.itemImagePath}}" alt='item image' class="itemImage pX10" width='150'>     
-    </div>
-    <div class="descWrapper rowFlex spaceBetween justified">
-      <p class="width100 pX10 semiBold">Description:</p><p class="width700 pX10">{{v.itemDescription}}</p>    
-    </div>
-</div>
-
-
+  <div class="width800 itemConainer">
+      <div class="detailImageWrapper rowFlex spaceBetween">
+        <div class="detailWrapper">
+          <div class="rowFlex">
+            <p class="width100 pX10 semiBold">Seller Name:</p><p class="pX10">{{v.sellerName}}</p>
+          </div>
+          <div class="rowFlex">
+          <p class="width100 pX10 semiBold">Last Bid:</p><p id="lastBidPrice" class="pX10">{{v.lastBidPrice}}</p>       
+          </div> 
+        </div>     
+        <img src="{{v.itemImagePath}}" alt='item image' class="itemImage pX10" width='150'>     
+      </div>
+      <div class="descWrapper rowFlex spaceBetween justified">
+        <p class="width100 pX10 semiBold">Description:</p><p class="width700 pX10">{{v.itemDescription}}</p>    
+      </div>
+  </div>
+  {# -------------------------------------------------------------------------------------------------- #}
   <h2 class="txtCenter">Place Bid</h2>        
   <form class="formAsContainter width800" action="" method="post" enctype="multipart/form-data">  
     <div class="rowFlex">
       <label class="formLabel width7rem">Bidders Name</label>
-      <input type="text" name="bidderName" class="width600" placeholder="" value="{{v.bidder}}">
+      <input type="text" name="bidderName" class="width600" placeholder="" value="{{v.bidderName}}">
     </div> 
     <div class="rowFlex">
       <label class="formLabel width7rem">Bidders Email</label>
-      <input type="text" name="bidderEmail" class="width600" placeholder="" value="{{v.email}}">
+      <input type="text" name="bidderEmail" class="width600" placeholder="" value="{{v.bidderEmail}}">
     </div>
     <div class="rowFlex">
       <label class="formLabel width7rem txtLeft">New Bid Price</label>
-      <input type="text" name="newBidPrice" class="width600" placeholder="" value="{{v.newBid}}">
+      <div class="colFlex">
+        <input type="text" name="newBidPrice" class="width600" placeholder="" value="{{v.newBid}}">
+        <span id="isBidlow" class="errorMessage width600 " value="{{id}}"></span><br>
+      </div>
     </div> <br> 
     <input type="submit" name="submitBid" value="Submit Bid" class="btnDefault">
   </form>
