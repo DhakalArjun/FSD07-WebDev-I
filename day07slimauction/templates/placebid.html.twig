@@ -23,15 +23,15 @@
   <form class="formAsContainter width800" action="" method="post" enctype="multipart/form-data">  
     <div class="rowFlex">
       <label class="formLabel width7rem">Bidders Name</label>
-      <input type="text" name="bidderName" class="width600" placeholder="" value="">
+      <input type="text" name="bidderName" class="width600" placeholder="" value="{{v.bidder}}">
     </div> 
     <div class="rowFlex">
       <label class="formLabel width7rem">Bidders Email</label>
-      <input type="text" name="bidderEmail" class="width600" placeholder="" value="">
+      <input type="text" name="bidderEmail" class="width600" placeholder="" value="{{v.email}}">
     </div>
     <div class="rowFlex">
       <label class="formLabel width7rem txtLeft">New Bid Price</label>
-      <input type="text" name="newBidPrice" class="width600" placeholder="" value="">
+      <input type="text" name="newBidPrice" class="width600" placeholder="" value="{{v.newBid}}">
     </div> <br> 
     <input type="submit" name="submitBid" value="Submit Bid" class="btnDefault">
   </form>

@@ -91,6 +91,9 @@ $app->post('/newauction', function ($request, $response, $args) {
         if (filter_var($sellerEmail, FILTER_VALIDATE_EMAIL) === false) {
         $errors[]="Please verify your email address, it doesn't look valid.";        
         }
+        if(!is_numeric($initialBid)){
+            $errors[]="Initial bid price must be a numeric value";
+        }
         // $fileNameReplaced = preg_replace("/s\-.,/", "_", $fileNameOriginal); // this is not working
         $fileNameReplaced =$fileNameOriginal;
         //echo  $fileNameReplaced;
@@ -126,14 +129,10 @@ $app->post('/newauction', function ($request, $response, $args) {
             DB::insert('auctions',['itemDescription'=>$itemDesc, 'itemImagePath'=>'uploads/'.$targetFileName, 'sellerName'=>$sellerName, 'sellerEmail'=>$sellerEmail, 'lastBidPrice'=>$initialBid]);
             move_uploaded_file($_FILES['imageToUpload']['tmp_name'],'uploads/'.$targetFileName);
             return $this->get('view')->render($response, 'newauction_success.html.twig');            
-        } else{
-            $valuesList = [
-                'itemDescription'=>$itemDesc,                 
-                'sellerName'=>$sellerName, 
-                'sellerEmail'=>$sellerEmail, 
-                'lastBidPrice'=>$initialBid
-            ];        
-            //printAuctionsForm($itemDesc,$sellerName, $sellerEmail, $initialBid);            
+        } else{            
+            $valuesList = ['description'=>$itemDesc, 'seller'=>$sellerName, 'sellerEmail'=>$sellerEmail, 'initialBid'=>$initialBid];
+            //print_r($valuesList);        
+                     
             return $this->get('view')->render($response, 'newauction.html.twig', ['errorList' => $errors, 'v' => $valuesList]);
         } //end of isset($_POST['create']))     
 });
@@ -173,7 +172,7 @@ $app->post('/placebid', function ($request, $response, $args) {
 
     $errors = [];
     if($newBidPrice<=$lastBid){
-        $errors[]= "You bid price is less than last bit, so you cannot bid with this price";
+        $errors[]= "You bid price is not greater than last bid, so you cannot bid with this price";
     }
 
     if(strlen($bidderName)<2|| strlen($bidderName)>100){
@@ -186,16 +185,20 @@ $app->post('/placebid', function ($request, $response, $args) {
         $errors[]="Please verify your email address, it doesn't look valid.";        
     }
 
+    if($errors){ 
+        $seller = $result['sellerName'];
+        $lastBid = $result['lastBidPrice'];
+        $imagePath = $result['itemImagePath'];
+        $desc = $result['itemDescription'];
 
+        $valuesList = ['bidder'=>$bidderName, 'email'=>$bidderEmail, 'newBid'=>$newBidPrice, 'sellerName'=>$seller, 
+        'lastBidPrice'=>$lastBid, 'itemImagePath'=>$imagePath, 'itemDescription'=>$desc];
+        //key text should match the text value inputs in place.html.twing                 
+        return $this->get('view')->render($response, 'placebid.html.twig', ['errorList' => $errors, 'v' => $valuesList]);
 
-
-
+    }else{
+        DB::update('auctions',['lastBidPrice'=>$newBidPrice, 'lastBidderName'=>$bidderName, 'lastBidderEmail'=>$bidderEmail], 'id=%d', $id);        
+        return $this->get('view')->render($response, 'newauction_success.html.twig'); 
+    }
     });
-
-
-
-
-
-
-
 $app->run();
