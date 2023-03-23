@@ -1,0 +1,28 @@
+{% extends "master.html.twig" %}
+{% block content %}
+  <table class="listitemsTable">
+    <tr class="tblHeader">
+      <td class="width800">Item Description</td>
+      <td class="width150">ImagePath</td>
+      <td class="width100">Seller Name</td>      
+      <td class="width100">Last Bid Price</td>          
+    </tr>
+    {% for item in v  %}
+      <tr class="tblRow">
+        <td class="width800">{{item.itemDescription}}</td>
+        <td class="width150"><img src="{{item.itemImagePath}}" alt="Item Image" width="150"></td>
+        {# <td class="width100">{{item.itemImagePath}}</td> #}
+        <td class="width100 txtCenter">{{item.sellerName}}</td>
+        <td class="width100 txtCenter">{{item.lastBidPrice}}</td>
+        <td class="width100 makeBidCell"><a href="placebid?id={{item.id}}" class="btnSmall ">Make a Bid</a></td>                   
+      </tr>
+    {% endfor %}
+  </table>  
+  {% if errorList %}
+      <ul>
+      {% for error in errorList %}
+          <li>{{ error }}</li>
+      {% endfor %}
+      </ul>
+  {% endif %}
+{% endblock content %}

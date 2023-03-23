@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/styles.css"/>
+        <title>{% block title %}{% endblock %} - My Webpage</title>
+        {% block addHead %}
+        {% endblock %}
+    </head>
+    <body id="containterCentered">        
+        <div id="navigation">
+            {% block nav %}               
+                    <ul>
+                        <li><a href="newauction">NEW AUCTION</a></li>
+                        <li><a href="listitems">ITEM LISTS</a></li>                                             
+                    </ul>                
+            {% endblock nav %}
+        </div>
+        <div id="content">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <div id="footer">
+            {% block footer %}
+                Copyright &nbsp; &copy; &nbsp; 2011 by <a href="http://day07slimauction.org/"> Arjun Dhakal</a>.
+            {% endblock footer %}
+        </div>        
+    </body>
+</html>

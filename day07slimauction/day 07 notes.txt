@@ -1,0 +1,75 @@
+DAY 07
+======
+
+* PHP Slim (microframework)
+* Twig (templates)
+* Meekrodb (MySQL database)
+* Monolog (logging)
+
+
+
+Mac installation after downloading, execute on terminal:
+
+chmod +x composer.phar
+sudo mv composer.phar /usr/local/bin/composer
+
+
+sudo nano /etc/hosts
+nano
+
+
+HOMEWORK
+========
+
+
+Required reading:
+
+* Twig
+- https://twig.symfony.com/doc/3.x/tags/if.html
+- https://twig.symfony.com/doc/3.x/tags/for.html
+- https://twig.symfony.com/doc/3.x/tags/extends.html
+
+* Meekrodb
+- https://meekro.com/quickstart.php
+- https://meekro.com/docs.php (read: insert, update, delete, query, queryFirstRow, queryFirstColumn, queryFirstField)
+
+Reading useful when implementing the homework.
+
+* PHP Slim documentation (general link, you don't need to actually read it)
+- http://www.slimframework.com/docs/v4/
+
+* Monolog (later)
+- https://github.com/Seldaek/monolog
+
+
+How to modify 'hosts' file on Windows, Mac OSX, Linux:
+https://www.webhostface.com/kb/knowledgebase/modify-hosts-file/
+
+
+TASK
+----
+
+Re-implement midterm using PHP Slim, Twig, Meekrodb.
+
+Create a new project day07slimauction, new database day07slimauction (with day07slimauction user) and new 'fake' host the hosts file.
+In your project you will have the following files:
+
+index.php
+.htaccess
+composer.json/lock
+styles.css
+
+directories:
+cache
+templates
+vendor
+
+URLs to handle
+/newauction
+/  (list of items)
+/placebid/{id} (e.g. /placebid/234 )
+/isbidtoolow/{id}/{newBid}  or  /isbittoolow?id=76&newBid=123.23
+$dbPassword = E5FzNt9Y-[b4UIW]
+
+
+

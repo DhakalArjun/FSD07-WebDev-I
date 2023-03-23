@@ -1,0 +1,48 @@
+{% extends "master.html.twig" %}
+{% block content %}
+
+<div class="width800 itemConainer">
+    <div class="detailImageWrapper rowFlex spaceBetween">
+      <div class="detailWrapper">
+        <div class="rowFlex">
+          <p class="width100 pX10 semiBold">Seller Name:</p><p class="pX10">{{v.sellerName}}</p>
+        </div>
+        <div class="rowFlex">
+        <p class="width100 pX10 semiBold">Last Bid:</p><p class="pX10">{{v.lastBidPrice}}</p>       
+        </div> 
+      </div>     
+      <img src="{{v.itemImagePath}}" alt='item image' class="itemImage pX10" width='150'>     
+    </div>
+    <div class="descWrapper rowFlex spaceBetween justified">
+      <p class="width100 pX10 semiBold">Description:</p><p class="width700 pX10">{{v.itemDescription}}</p>    
+    </div>
+</div>
+
+
+  <h2 class="txtCenter">Place Bid</h2>        
+  <form class="formAsContainter width800" action="" method="post" enctype="multipart/form-data">  
+    <div class="rowFlex">
+      <label class="formLabel width7rem">Bidders Name</label>
+      <input type="text" name="bidderName" class="width600" placeholder="" value="">
+    </div> 
+    <div class="rowFlex">
+      <label class="formLabel width7rem">Bidders Email</label>
+      <input type="text" name="bidderEmail" class="width600" placeholder="" value="">
+    </div>
+    <div class="rowFlex">
+      <label class="formLabel width7rem txtLeft">New Bid Price</label>
+      <input type="text" name="newBidPrice" class="width600" placeholder="" value="">
+    </div> <br> 
+    <input type="submit" name="submitBid" value="Submit Bid" class="btnDefault">
+  </form>
+  {% if errorList %}
+    <div class="errorMsgDiv width800">
+      <h4>Create new auction failed, error occured</h4>
+      <ul>
+        {% for error in errorList %}
+            <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endblock content %}

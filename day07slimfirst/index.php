@@ -67,6 +67,7 @@ $app->post('/addperson', function ($request, $response, $args) {
         $errorList[] = "Age must be an integer number between 0 and 150";
         $age = "";
     }
+    print_r($errorList);
     //
     if ($errorList) { // STATE 2: errors
         $valuesList = ['name' => $name, 'age' => $age];
